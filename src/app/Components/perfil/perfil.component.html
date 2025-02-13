@@ -1,0 +1,73 @@
+<div
+  [class]="
+    isLogged.role == 'client'
+      ? 'font-[sans-serif] bg-gradient-to-r from-purple-900 via-purple-800 to-purple-600 text-gray-800 min-h-screen flex flex-col items-center justify-center'
+      : 'font-[sans-serif] bg-gray-950 min-h-screen flex flex-col items-center justify-center'
+  "
+>
+  <div>
+    <img
+      src="assets/Logo2.png"
+      alt=""
+      class="top-0 w-80 mb-16 justify-center"
+    />
+  </div>
+
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-[40vw] w-full">
+    <h2
+      [class]="
+        isLogged.role == 'client'
+          ? 'text-3xl font-bold text-center text-purple-800 mb-6'
+          : 'text-3xl font-bold text-center text-gray-800 mb-6'
+      "
+    >
+      Welcome, {{ name }}!
+    </h2>
+
+    <div class="mb-4">
+      <p
+        [class]="
+          isLogged == 'client'
+            ? 'text-xl text-purple-800 font-semibold'
+            : 'text-xl text-gray-800 font-semibold'
+        "
+      >
+        Your Details:
+      </p>
+      <div class="mt-2">
+        <p
+          [class]="
+            isLogged.role == 'client'
+              ? 'text-md text-purple-800'
+              : 'text-md text-gray-800'
+          "
+        >
+          Name: {{ user?.name }}
+        </p>
+        <p
+          [class]="
+            isLogged == 'client'
+              ? 'text-md text-purple-800'
+              : 'text-md text-gray-800'
+          "
+        >
+          Email: {{ user?.email }}
+        </p>
+      </div>
+    </div>
+
+    <div class="text-center mt-6">
+      <button
+        (click)="logout()"
+        routerLink="/login"
+        [class]="
+          isLogged.role == 'client'
+            ? 'w-full py-2 bg-purple-800 text-white font-bold rounded-lg hover:bg-purple-900'
+            : 'w-full py-2 bg-gray-800 text-white font-bold rounded-lg hover:bg-gray-950'
+        "
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</div>

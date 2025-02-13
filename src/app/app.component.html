@@ -1,0 +1,136 @@
+<nav class="fixed top-0 w-full bg-white shadow-md z-50 h-20">
+  <div class="flex justify-between items-center h-full max-w-[80vw] mx-auto">
+    <!-- Logo -->
+    <div>
+      <a routerLink="/home">
+        <img src="../assets/LogoH.png" alt="Logo" class="w-48" />
+      </a>
+    </div>
+
+    <!-- Itens da Navbar -->
+    <div class="flex space-x-8">
+      <!-- Campo de pesquisa -->
+      @if(checkRole == 'client' || checkRole == null){
+      <div>
+        <input
+          #isbn
+          type="search"
+          placeholder="Find a book by ISBN"
+          class="border py-1 px-2 pl-5 rounded-l-lg border-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+        <button
+          class="border border-purple-700 focus:outline-none bg-purple-700 py-1 px-3 rounded-r-lg hover:bg-purple-900"
+          type="button"
+          (click)="findByIsbn(isbn)"
+        >
+          <i class="fa-solid fa-magnifying-glass fa-md text-white"></i>
+        </button>
+      </div>
+
+      <a
+        routerLink="/books"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Book Collection
+      </a>
+      } @if(isLoggedIn$ | async){ @if(checkRole == 'client'){
+      <a
+        routerLink="/books/my/recommendations"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Recommendations
+      </a>
+      <a
+        routerLink="/reviews"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Reviews
+      </a>
+      } @else{
+      <a
+        routerLink="/dashboard"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Dashboard
+      </a>
+      }
+      <a
+        routerLink="/profile"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Profile
+      </a>
+      <a
+        (click)="authService.logout()"
+        routerLink="/login"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Logout
+      </a>
+      } @else {
+      <a
+        routerLink="/login"
+        class="text-xl text-gray-800 font-bold hover:text-purple-800"
+      >
+        Login Area
+      </a>
+      }
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer>
+  <div class="bg-purple-950 text-white pt-20 pb-10">
+    <div class="container mx-auto grid grid-cols-2 gap-4 items-center">
+      <div class="flex justify-center items-center space-x-6">
+        <div class="text-left">
+          <a routerLink="/home">
+            <img src="../assets/Logo2.png" alt="Logo" class="w-48" />
+          </a>
+        </div>
+
+        <!-- Linha Vertical -->
+        <div class="h-20 w-1 bg-white"></div>
+
+        <div class="text-left">
+          <h3 class="text-xl font-bold">Address</h3>
+          <p class="text-lg">Diagon Alley 934, South London</p>
+        </div>
+      </div>
+
+      <!-- Contact Us e Follow Us -->
+      <div class="flex justify-center items-center space-x-6">
+        <div class="text-right">
+          <h3 class="text-xl font-bold">Contact Us</h3>
+          <p class="text-lg">Phone: +351 123 456 789</p>
+          <p class="text-lg">Email: contact&#64;mcgonagall.com</p>
+        </div>
+
+        <!-- Linha Vertical -->
+        <div class="h-20 w-1 bg-white"></div>
+
+        <div class="text-left">
+          <h3 class="text-xl font-bold pb-2">Follow Us</h3>
+          <div class="flex space-x-4">
+            <a href="https://www.facebook.com" target="_blank">
+              <i class="fa-brands fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+              <i class="fa-brands fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank">
+              <i class="fa-brands fa-twitter fa-2x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <p class="text-lg font-semibold text-center pt-24">
+      &copy; 2025 - McGonagall Bookstore
+    </p>
+  </div>
+</footer>

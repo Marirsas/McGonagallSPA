@@ -1,0 +1,33 @@
+<div class="bg-white font-sans flex items-center justify-center min-h-screen">
+  <div class="w-full">
+    <img
+      #carouselImage
+      [src]="currentImage"
+      alt="Biblioteca"
+      class="w-full shadow-lg transition-opacity duration-1000 opacity-100 max-h-[100vh] object-cover"
+    />
+
+    <div
+      class="absolute inset-0 flex flex-col items-center justify-center text-center"
+    >
+      <img src="/assets/LogoB.png" alt="Logo" class="mt-40 w-60" />
+      <h1
+        class="mt-6 text-9xl font-extrabold text-black leading-tight antialiased w-[60vw] leading-[120px]"
+      >
+        Find Your Next Adventure!
+      </h1>
+
+      <h3 class="mt-4 text-lg md:text-xl font-semibold text-black max-w-xl">
+        Another day, another book.<br />
+        Discover a new world with McGonagall!
+      </h3>
+
+      <button
+        routerLink="/books"
+        class="mt-6 md:mt-10 bg-purple-700 hover:bg-purple-900 text-white text-lg md:text-xl px-8 md:px-10 py-2 font-bold rounded-full"
+      >
+        Start Adventure
+      </button>
+    </div>
+  </div>
+</div>
