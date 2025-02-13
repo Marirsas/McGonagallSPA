@@ -28,13 +28,13 @@ export class DashboardComponent implements OnInit {
   bookColletionView: any[] = [];
   activeAv: boolean = true;
   activeUnAv: boolean = false;
-  modalAberto: boolean = false;
+  openedModal: boolean = false;
   bookForm!: FormGroup;
   categoryForm!: FormGroup;
-  livroSelecionado: any;
+  selectedBook: any;
   allCategories: Category[] | undefined;
   isEditingOrCreating: string = '';
-  modalAberto2: boolean = false;
+  openedModal2: boolean = false;
 
   constructor(
     private bookServ: BookService,
@@ -130,7 +130,7 @@ export class DashboardComponent implements OnInit {
           title: 'Book added successfully!.',
         });
 
-        this.fecharModal();
+        this.closeModal();
       },
       error: (error) => {
         Swal.fire({
@@ -163,7 +163,7 @@ export class DashboardComponent implements OnInit {
           title: 'Book updated successfully!.',
         });
 
-        this.fecharModal();
+        this.closeModal();
       },
       error: (error) => {
         Swal.fire({
@@ -242,16 +242,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  abrirModal(isEditingOrCreating: string, livro?: Book) {
+  openModal(isEditingOrCreating: string, livro?: Book) {
     this.isEditingOrCreating = isEditingOrCreating;
-    this.livroSelecionado = livro;
-    this.modalAberto = true;
-    this.fillBookForm(this.livroSelecionado);
+    this.selectedBook = livro;
+    this.openedModal = true;
+    this.fillBookForm(this.selectedBook);
   }
 
-  fecharModal() {
-    this.modalAberto = false;
-    this.livroSelecionado = null;
+  closeModal() {
+    this.openedModal = false;
+    this.selectedBook = null;
     this.bookForm.get('isbn')?.setValue('');
     this.bookForm.get('title')?.setValue('');
     this.bookForm.get('author')?.setValue('');
@@ -260,9 +260,9 @@ export class DashboardComponent implements OnInit {
     this.bookForm.get('price')?.setValue('');
   }
 
-  fecharModalFora(event: Event) {
+  closeModalOut(event: Event) {
     if (event.target === event.currentTarget) {
-      this.fecharModal();
+      this.closeModal();
     }
   }
 
@@ -272,18 +272,18 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  abrirModalCategory() {
-    this.modalAberto2 = true;
+  openCategoryModal() {
+    this.openedModal2 = true;
   }
 
-  fecharModalCategory() {
-    this.modalAberto2 = false;
+  closeCategoryModal() {
+    this.openedModal2 = false;
     this.categoryForm.get('name')?.setValue('');
   }
 
-  fecharModalCategoryFora(event: Event) {
+  closeCategoryModalOut(event: Event) {
     if (event.target === event.currentTarget) {
-      this.fecharModalCategory();
+      this.closeCategoryModal();
     }
   }
 
@@ -297,7 +297,7 @@ export class DashboardComponent implements OnInit {
           icon: 'success',
           title: 'Category added successfully!.',
         });
-        this.fecharModalCategory();
+        this.closeCategoryModal();
       },
       error: (error) => {
         Swal.fire({

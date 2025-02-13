@@ -35,14 +35,14 @@ import { UnavailableBooksDirective } from '../../Directives/unavailable-books.di
 })
 export class ReviewComponent implements OnInit {
   reviewForm!: FormGroup;
-  modalAberto: boolean = false;
-  livroSelecionado: Book | null = null;
+  openedModal: boolean = false;
+  selectedBook: Book | null = null;
   allCategories: Category[] | undefined;
   selectedCategory: string = 'all';
   bookCollection: any[] = [];
   isLogged: any;
   reviewCollection: any[] = [];
-  teste: boolean = false;
+  check: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -66,19 +66,19 @@ export class ReviewComponent implements OnInit {
   }
 
   abrirModal(livro: Book) {
-    this.livroSelecionado = livro;
-    this.modalAberto = true;
-    this.getAllReviews(this.livroSelecionado.isbn);
-    this.reviewForm.get('isbn')?.setValue(this.livroSelecionado.isbn);
+    this.selectedBook = livro;
+    this.openedModal = true;
+    this.getAllReviews(this.selectedBook.isbn);
+    this.reviewForm.get('isbn')?.setValue(this.selectedBook.isbn);
   }
 
   fecharModal() {
-    this.modalAberto = false;
-    this.livroSelecionado = null;
+    this.openedModal = false;
+    this.selectedBook = null;
     this.reviewForm.get('isbn')?.setValue('');
     this.reviewForm.get('review')?.setValue('');
-    if (this.teste == true) {
-      this.teste = false;
+    if (this.check == true) {
+      this.check = false;
     }
   }
 
@@ -146,7 +146,7 @@ export class ReviewComponent implements OnInit {
   }
 
   toCreteReviewPage() {
-    this.teste = !this.teste;
+    this.check = !this.check;
     this.reviewForm.get('review')?.setValue('');
   }
 }

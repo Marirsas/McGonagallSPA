@@ -56,7 +56,7 @@
 
     <!-- modal -->
     <div
-      *ngIf="modalAberto"
+      *ngIf="openedModal"
       class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
       (click)="fecharModalFora($event)"
     >
@@ -73,13 +73,13 @@
             X
           </button>
         </div>
-        @if (!teste) {
+        @if (!check) {
         <div class="grid grid-cols-5 gap-4">
           <!-- Imagem -->
           <div class="col-span-1">
             <img
-              appUnavailableBooks="{{ livroSelecionado?.available }}"
-              [src]="livroSelecionado?.cover ?? '/assets/book-na.jpg'"
+              appUnavailableBooks="{{ selectedBook?.available }}"
+              [src]="selectedBook?.cover ?? '/assets/book-na.jpg'"
               alt="Book Cover"
               class="w-[15vw] h-[20vh] object-contain rounded-lg"
             />
@@ -95,21 +95,21 @@
                 Create new review
               </button>
               <p class="ml-5 text-left text-md text-purple-800 mb-2">
-                ISBN: {{ livroSelecionado?.isbn }}
+                ISBN: {{ selectedBook?.isbn }}
               </p>
               <h3 class="ml-5 text-xl font-bold text-left mb-2">
-                {{ livroSelecionado?.title }}
+                {{ selectedBook?.title }}
               </h3>
               <p
                 class="ml-5 font-semibold text-left text-lg text-purple-800 mb-2"
               >
-                Autor: {{ livroSelecionado?.author }}
+                Autor: {{ selectedBook?.author }}
               </p>
               <p class="ml-5 text-left text-md text-purple-800 mb-4">
-                Categoria: {{ livroSelecionado?.category }}
+                Categoria: {{ selectedBook?.category }}
               </p>
 
-              @if (!livroSelecionado?.available) {
+              @if (!selectedBook?.available) {
               <p
                 class="text-center text-sm text-red-600 font-semibold mb-4 text-white-500"
               >

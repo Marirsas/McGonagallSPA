@@ -36,7 +36,6 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('User data:', this.registerForm.value);
       // Chamar o método para registrar o usuário
       this.registerNewUser();
     }

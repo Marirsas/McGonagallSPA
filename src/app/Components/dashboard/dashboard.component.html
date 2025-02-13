@@ -35,14 +35,14 @@
         <button
           class="w-[10vw] shadow-sm py-1.5 px-2 text-md font-semibold rounded-md text-white bg-purple-700 hover:bg-purple-900 focus:outline-none ml-5"
           type="button"
-          (click)="abrirModal('creating')"
+          (click)="openModal('creating')"
         >
           Add new Book
         </button>
         <button
           class="w-[10vw] shadow-sm py-1.5 px-2 text-md font-semibold rounded-md text-white bg-purple-700 hover:bg-purple-900 focus:outline-none ml-5"
           type="button"
-          (click)="abrirModalCategory()"
+          (click)="openCategoryModal()"
         >
           Add new Category
         </button>
@@ -110,7 +110,7 @@
         <ngx-datatable-column name="Actions" [width]="20">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <div class="flex space-x-4">
-              <button type="button" (click)="abrirModal('editing', row)">
+              <button type="button" (click)="openModal('editing', row)">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
               </button>
               <button type="button" (click)="deleteBook(row.isbn)">
@@ -124,9 +124,9 @@
 
     <!-- Inicio do modal livros -->
     <div
-      *ngIf="modalAberto"
+      *ngIf="openedModal"
       class="mt-20 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-      (click)="fecharModalFora($event)"
+      (click)="closeCategoryModalOut($event)"
     >
       <div
         class="bg-white p-6 rounded-lg shadow-lg w-2/4"
@@ -135,7 +135,7 @@
         <div class="flex justify-end">
           <button
             type="button"
-            (click)="fecharModal()"
+            (click)="closeModal()"
             class="text-xl text-purple-600 font-bold"
           >
             X
@@ -145,7 +145,7 @@
         <div class="grid grid-cols-2 gap-4">
           <div>
             <img
-              [src]="livroSelecionado?.cover ?? '/assets/book-na.jpg'"
+              [src]="selectedBook?.cover ?? '/assets/book-na.jpg'"
               alt="Book Cover"
               class="w-full h-[54vh] object-contain rounded-lg"
             />
@@ -254,9 +254,9 @@
 
   <!-- Inicio do modal create category -->
   <div
-    *ngIf="modalAberto2"
+    *ngIf="openedModal2"
     class="mt-20 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-    (click)="fecharModalCategoryFora($event)"
+    (click)="closeCategoryModalOut($event)"
   >
     <div
       class="bg-white p-6 rounded-lg shadow-lg w-2/4"
@@ -265,7 +265,7 @@
       <div class="flex justify-end">
         <button
           type="button"
-          (click)="fecharModalCategory()"
+          (click)="closeCategoryModal()"
           class="text-xl text-purple-600 font-bold"
         >
           X

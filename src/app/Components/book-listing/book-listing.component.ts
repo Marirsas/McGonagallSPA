@@ -20,7 +20,7 @@ import { User1 } from '../../Models/user1';
   styleUrl: './book-listing.component.css',
 })
 export class BookListingComponent implements OnInit {
-  modalAberto: boolean = false;
+  openedModal: boolean = false;
   selectedBook: Book | null = null;
   allCategories: Category[] | undefined;
   selectedCategory: string = 'all';
@@ -86,17 +86,17 @@ export class BookListingComponent implements OnInit {
 
   openModal(livro: Book) {
     this.selectedBook = livro;
-    this.modalAberto = true;
+    this.openedModal = true;
   }
 
-  fecharModal() {
-    this.modalAberto = false;
+  closeModal() {
+    this.openedModal = false;
     this.selectedBook = null;
   }
 
-  fecharModalFora(event: Event) {
+  closeModalOut(event: Event) {
     if (event.target === event.currentTarget) {
-      this.fecharModal();
+      this.closeModal();
     }
   }
 
@@ -111,7 +111,6 @@ export class BookListingComponent implements OnInit {
     this.bookServ.get('book').subscribe(
       (resp) => {
         this.bookCollection = resp;
-        console.log(resp);
       },
       (error) => {
         console.error(error);
@@ -125,7 +124,6 @@ export class BookListingComponent implements OnInit {
       this.bookServ.get('book/available').subscribe(
         (resp) => {
           this.bookCollection = resp;
-          console.log(resp);
           resolve(true);
         },
         (error) => {
@@ -181,7 +179,6 @@ export class BookListingComponent implements OnInit {
           .sort(() => Math.random() - 0.5) // Embaralha
           .slice(0, 6); // Seleciona os 3 primeiros
       }
-      console.log(this.bookCollection);
       resolve(true);
     });
   }
